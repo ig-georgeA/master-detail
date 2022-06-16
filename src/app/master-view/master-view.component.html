@@ -1,0 +1,131 @@
+<div class="row-layout group">
+  <div class="column-layout group_1">
+    <div class="column-layout group_2">
+      <igx-list *ngFor="let item of northwindJasonApiCustomers" class="list">
+        <igx-list-item [isHeader]="false">
+          <span igxListLineTitle>{{ item.contactName }}</span>
+          <span igxListLineSubTitle>{{ item.customerID }}</span>
+        </igx-list-item>
+      </igx-list>
+    </div>
+  </div>
+  <div class="column-layout group_3">
+    <div class="row-layout group_4">
+      <div class="column-layout group_5">
+        <div class="column-layout group_6">
+          <igx-avatar src="/assets/Avatar13.png" size="large" [roundShape]="true" class="avatar"></igx-avatar>
+          <div class="column-layout group_7">
+            <h5 class="content">
+              Maria Anders
+            </h5>
+            <p class="igx-typography__subtitle-1 content">
+              ALFKI
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="column-layout group_8">
+      <div class="row-layout group_9">
+        <div class="column-layout group_10">
+          <div class="column-layout group_11">
+            <p class="igx-typography__subtitle-2 text">
+              Title
+            </p>
+            <p class="text">
+              Head Purchaser
+            </p>
+          </div>
+          <div class="column-layout group_11">
+            <p class="igx-typography__subtitle-2 text">
+              Email
+            </p>
+            <p class="text">
+              Orangebeard@company.com
+            </p>
+          </div>
+          <div class="column-layout group_12">
+            <p class="igx-typography__subtitle-2 text">
+              Phone
+            </p>
+            <p class="text">
+              (123) 456-7890
+            </p>
+          </div>
+        </div>
+        <div class="column-layout group">
+          <div class="column-layout group_13">
+            <p class="igx-typography__subtitle-2 text">
+              Street
+            </p>
+            <p class="text">
+              123 Beecham Lane
+            </p>
+          </div>
+          <div class="row-layout group_14">
+            <div class="column-layout group_15">
+              <p class="igx-typography__subtitle-2 text">
+                City
+              </p>
+              <p class="text">
+                Babble Brook
+              </p>
+            </div>
+            <div class="column-layout group_16">
+              <p class="igx-typography__subtitle-2 text">
+                State
+              </p>
+              <p class="text">
+                NJ
+              </p>
+            </div>
+          </div>
+          <div class="column-layout group_17">
+            <p class="igx-typography__subtitle-2 text">
+              Country
+            </p>
+            <p class="text">
+              Germany
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="column-layout group_18">
+        <igx-grid [data]="northwindJasonApiCustomerOrdersCustomerId" primaryKey="orderID" displayDensity="cosy" rowSelection="single" [hideRowSelectors]="true" [allowFiltering]="true" filterMode="excelStyleFilter" class="grid">
+          <igx-grid-toolbar>
+            <igx-grid-toolbar-actions>
+              <igx-grid-toolbar-pinning>true</igx-grid-toolbar-pinning>
+            </igx-grid-toolbar-actions>
+            <igx-grid-toolbar-title>Orders</igx-grid-toolbar-title>
+          </igx-grid-toolbar>
+          <igx-column header="orderID" field="orderID" dataType="number" [sortable]="true" title="orderID"></igx-column>
+          <igx-column header="customerID" field="customerID" dataType="string" [sortable]="true" title="customerID"></igx-column>
+          <igx-column header="employeeID" field="employeeID" dataType="number" [sortable]="true" title="employeeID"></igx-column>
+          <igx-column header="orderDate" field="orderDate" dataType="string" [sortable]="true" title="orderDate"></igx-column>
+          <igx-column header="requiredDate" field="requiredDate" dataType="string" [sortable]="true" title="requiredDate"></igx-column>
+          <igx-column header="shippedDate" field="shippedDate" dataType="string" [sortable]="true" title="shippedDate"></igx-column>
+          <igx-column header="shipVia" field="shipVia" dataType="number" [sortable]="true" title="shipVia"></igx-column>
+          <igx-column header="freight" field="freight" dataType="number" [sortable]="true" title="freight"></igx-column>
+          <igx-column header="shipName" field="shipName" dataType="string" [sortable]="true" title="shipName"></igx-column>
+          <igx-column header="shipAddress" field="shipAddress" dataType="string" [sortable]="true" title="shipAddress"></igx-column>
+          <igx-column header="shipCity" field="shipCity" dataType="string" [sortable]="true" title="shipCity"></igx-column>
+          <igx-column header="shipRegion" field="shipRegion" dataType="string" [sortable]="true" title="shipRegion"></igx-column>
+          <igx-column header="shipPostalCode" field="shipPostalCode" dataType="string" [sortable]="true" title="shipPostalCode"></igx-column>
+          <igx-column header="shipCountry" field="shipCountry" dataType="string" [sortable]="true" title="shipCountry"></igx-column>
+        </igx-grid>
+      </div>
+      <div class="column-layout group_18">
+        <igx-grid [data]="northwindJasonApiCustomerOrderDetailsOrderId" primaryKey="productName" displayDensity="cosy" [allowFiltering]="true" filterMode="excelStyleFilter" class="grid">
+          <igx-grid-toolbar>
+            <igx-grid-toolbar-title>Order details</igx-grid-toolbar-title>
+          </igx-grid-toolbar>
+          <igx-column header="productName" field="productName" dataType="string" [sortable]="true" title="productName"></igx-column>
+          <igx-column header="unitPrice" field="unitPrice" dataType="number" [sortable]="true" title="unitPrice"></igx-column>
+          <igx-column header="quantity" field="quantity" dataType="number" [sortable]="true" title="quantity"></igx-column>
+          <igx-column header="discount" field="discount" dataType="number" [sortable]="true" title="discount"></igx-column>
+          <igx-column header="extendedPrice" field="extendedPrice" dataType="number" [sortable]="true" title="extendedPrice"></igx-column>
+        </igx-grid>
+      </div>
+    </div>
+  </div>
+</div>
