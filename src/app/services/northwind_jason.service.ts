@@ -13,12 +13,10 @@ export class Northwind_JasonService {
   public getApiCustomers(): Observable<any> {
     return this.http.get(`${API_ENDPOINT}/api/customers`);
   }
-  public getApiCustomerOrdersCustomerId(): Observable<any> {
-    const customerId = 'ALFKI';
+  public getApiCustomerOrdersCustomerId(customerId = 'ALFKI'): Observable<any> {
     return this.http.get(`${API_ENDPOINT}/api/customer_orders/${customerId}`);
   }
-  public getApiCustomerOrderDetailsOrderId(): Observable<any> {
-    const orderId = '10248';
+  public getApiCustomerOrderDetailsOrderId(orderId = '10248'): Observable<any> {
     return this.http.get(`${API_ENDPOINT}/api/customer_order_details/${orderId}`);
   }
 }
