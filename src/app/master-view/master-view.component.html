@@ -1,8 +1,8 @@
 <div class="row-layout group">
   <div class="column-layout group_1">
     <div class="column-layout group_2">
-      <igx-list *ngFor="let item of northwindJasonApiCustomers" class="list">
-        <igx-list-item [isHeader]="false">
+      <igx-list class="list">
+        <igx-list-item [isHeader]="false" *ngFor="let item of northwindJasonApiCustomers">
           <span igxListLineTitle>{{ item.contactName }}</span>
           <span igxListLineSubTitle>{{ item.customerID }}</span>
         </igx-list-item>
