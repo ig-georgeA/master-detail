@@ -2,24 +2,29 @@
   <div class="column-layout group_1">
     <div class="column-layout group_2">
       <igx-list class="list">
-        <igx-list-item [isHeader]="false" *ngFor="let item of northwindJasonApiCustomers">
+        <igx-list-item
+          *ngFor="let item of northwindJasonApiCustomers"
+          [isHeader]="false"
+          [class.selected]="this.selectedCustomerId === item.customerID"
+          (click)="this.selectCustomer(item.customerID)"
+        >
           <span igxListLineTitle>{{ item.contactName }}</span>
           <span igxListLineSubTitle>{{ item.customerID }}</span>
         </igx-list-item>
       </igx-list>
     </div>
   </div>
-  <div class="column-layout group_3">
+  <div class="column-layout group_3" *ngIf="selectedCustomer">
     <div class="row-layout group_4">
       <div class="column-layout group_5">
         <div class="column-layout group_6">
           <igx-avatar src="/assets/Avatar13.png" size="large" [roundShape]="true" class="avatar"></igx-avatar>
           <div class="column-layout group_7">
             <h5 class="content">
-              Maria Anders
+              {{selectedCustomer.contactName}}
             </h5>
             <p class="igx-typography__subtitle-1 content">
-              ALFKI
+              {{selectedCustomer.customerID}}
             </p>
           </div>
         </div>
@@ -33,15 +38,7 @@
               Title
             </p>
             <p class="text">
-              Head Purchaser
-            </p>
-          </div>
-          <div class="column-layout group_11">
-            <p class="igx-typography__subtitle-2 text">
-              Email
-            </p>
-            <p class="text">
-              Orangebeard@company.com
+              {{selectedCustomer.contactTitle}}
             </p>
           </div>
           <div class="column-layout group_12">
@@ -91,7 +88,9 @@
         </div>
       </div>
       <div class="column-layout group_18">
-        <igx-grid [data]="northwindJasonApiCustomerOrdersCustomerId" primaryKey="orderID" displayDensity="cosy" rowSelection="single" [hideRowSelectors]="true" [allowFiltering]="true" filterMode="excelStyleFilter" class="grid">
+        <igx-grid [data]="northwindJasonApiCustomerOrdersCustomerId" primaryKey="orderID" displayDensity="cosy" rowSelection="single" [hideRowSelectors]="true" [allowFiltering]="true" filterMode="excelStyleFilter" class="grid"
+          (selected)="orderSelected($event.cell.row.data.orderID)"
+        >
           <igx-grid-toolbar>
             <igx-grid-toolbar-actions>
               <igx-grid-toolbar-pinning>true</igx-grid-toolbar-pinning>
@@ -115,6 +114,7 @@
         </igx-grid>
       </div>
       <div class="column-layout group_18">
+        <span>selectedOrderId: {{selectedOrderId}}</span>
         <igx-grid [data]="northwindJasonApiCustomerOrderDetailsOrderId" primaryKey="productName" displayDensity="cosy" [allowFiltering]="true" filterMode="excelStyleFilter" class="grid">
           <igx-grid-toolbar>
             <igx-grid-toolbar-title>Order details</igx-grid-toolbar-title>
