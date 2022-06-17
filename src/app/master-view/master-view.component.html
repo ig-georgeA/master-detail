@@ -88,8 +88,15 @@
         </div>
       </div>
       <div class="column-layout group_18">
-        <igx-grid [data]="northwindJasonApiCustomerOrdersCustomerId" primaryKey="orderID" displayDensity="cosy" rowSelection="single" [hideRowSelectors]="true" [allowFiltering]="true" filterMode="excelStyleFilter" class="grid"
-          (selected)="orderSelected($event.cell.row.data.orderID)"
+        <igx-grid [data]="northwindJasonApiCustomerOrdersCustomerId"
+          primaryKey="orderID" displayDensity="cosy"
+          rowSelection="single"
+          cellSelection="none"
+          [hideRowSelectors]="true"
+          [allowFiltering]="true"
+          filterMode="excelStyleFilter" class="grid"
+          [isLoading]="ordersAreLoading"
+          (rowSelectionChanging)="orderSelected($event)"
         >
           <igx-grid-toolbar>
             <igx-grid-toolbar-actions>
@@ -97,7 +104,7 @@
             </igx-grid-toolbar-actions>
             <igx-grid-toolbar-title>Orders</igx-grid-toolbar-title>
           </igx-grid-toolbar>
-          <igx-column header="orderID" field="orderID" dataType="number" [sortable]="true" title="orderID"></igx-column>
+          <igx-column header="orderID" field="orderID" [sortable]="true" title="orderID"></igx-column>
           <igx-column header="customerID" field="customerID" dataType="string" [sortable]="true" title="customerID"></igx-column>
           <igx-column header="employeeID" field="employeeID" dataType="number" [sortable]="true" title="employeeID"></igx-column>
           <igx-column header="orderDate" field="orderDate" dataType="string" [sortable]="true" title="orderDate"></igx-column>
@@ -114,10 +121,13 @@
         </igx-grid>
       </div>
       <div class="column-layout group_18">
-        <span>selectedOrderId: {{selectedOrderId}}</span>
-        <igx-grid [data]="northwindJasonApiCustomerOrderDetailsOrderId" primaryKey="productName" displayDensity="cosy" [allowFiltering]="true" filterMode="excelStyleFilter" class="grid">
+        <igx-grid [data]="northwindJasonApiCustomerOrderDetailsOrderId"
+          primaryKey="productName" displayDensity="cosy"
+          [allowFiltering]="true" filterMode="excelStyleFilter" class="grid"
+          [isLoading]="detailsAreLoading"
+        >
           <igx-grid-toolbar>
-            <igx-grid-toolbar-title>Order details</igx-grid-toolbar-title>
+            <igx-grid-toolbar-title>Order details #{{ selectedOrderId }}</igx-grid-toolbar-title>
           </igx-grid-toolbar>
           <igx-column header="productName" field="productName" dataType="string" [sortable]="true" title="productName"></igx-column>
           <igx-column header="unitPrice" field="unitPrice" dataType="number" [sortable]="true" title="unitPrice"></igx-column>

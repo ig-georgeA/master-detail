@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { IRowSelectionEventArgs } from 'igniteui-angular';
 import { ICustomer, Northwind_JasonService } from '../services/northwind_jason.service';
 
 @Component({
@@ -18,6 +18,8 @@ export class MasterViewComponent implements OnInit {
   }
 
   public selectedOrderId?: number;
+  public ordersAreLoading = true;
+  public detailsAreLoading = true;
 
   constructor(
     private northwind_JasonService: Northwind_JasonService,
@@ -34,21 +36,29 @@ export class MasterViewComponent implements OnInit {
 
   public selectCustomer(customerID: string) {
     this.selectedOrderId = undefined;
-    this.northwindJasonApiCustomerOrdersCustomerId = [];
-    this.northwindJasonApiCustomerOrderDetailsOrderId = [];
+    // this.northwindJasonApiCustomerOrdersCustomerId = [];
+    // this.northwindJasonApiCustomerOrderDetailsOrderId = [];
 
     this.selectedCustomerId = customerID;
     this.loadCustomerData(customerID);
   }
 
   public loadCustomerData(customerID: string) {
-    this.northwind_JasonService.getApiCustomerOrdersCustomerId(customerID).subscribe(data => this.northwindJasonApiCustomerOrdersCustomerId = data);
+    this.ordersAreLoading = true;
+    this.northwind_JasonService.getApiCustomerOrdersCustomerId(customerID).subscribe(data => { 
+      this.northwindJasonApiCustomerOrdersCustomerId = data;
+      this.ordersAreLoading = false;
+      this.detailsAreLoading = false;
+    });
   }
 
-  public orderSelected(orderID: number) {
-    this.northwindJasonApiCustomerOrderDetailsOrderId = [];
-
-    this.selectedOrderId = orderID;
-    this.northwind_JasonService.getApiCustomerOrderDetailsOrderId(orderID).subscribe(data => this.northwindJasonApiCustomerOrderDetailsOrderId = data);
+  public orderSelected(orderID: IRowSelectionEventArgs) {
+    // this.northwindJasonApiCustomerOrderDetailsOrderId = [];
+    this.detailsAreLoading = true;
+    this.selectedOrderId = orderID.newSelection[0];
+    this.northwind_JasonService.getApiCustomerOrderDetailsOrderId(orderID.newSelection[0]).subscribe(data => { 
+      this.northwindJasonApiCustomerOrderDetailsOrderId = data;
+      this.detailsAreLoading = false;
+    });
   }
 }
